@@ -15,7 +15,7 @@ app.listen(
 let id = 0
 books = [];
 
-// Create
+// Create a new book
 app.post('/books', (req, res) => {
     id += 1
     books.push({ id: id ,... req.body })
@@ -25,19 +25,19 @@ app.post('/books', (req, res) => {
     })
 })
 
-// Read
+// Get all books
 app.get('/books', (req, res) => {
     res.send(books)
 })
 
-// Read 2
+// Get a specific boo,
 app.get('/books/:id', (req, res) => {
     res.send(
         books.find((book) => book.id == req.params.id )
     )
 })
 
-// Update
+// Update a book
 app.patch('/books/:id', (req, res) => {
     console.log(req.body)
     const { name, year, category } = req.body
@@ -50,7 +50,7 @@ app.patch('/books/:id', (req, res) => {
     res.send(`The book '${book.name}' updated`)
 })
 
-// Delete
+// Delete a book
 app.delete('/books/:id', (req, res) => {
     books = books.filter((book) => book.id != req.params.id)
 
