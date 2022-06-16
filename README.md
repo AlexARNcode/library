@@ -11,4 +11,6 @@ It is used to manage your books, you can:
 - Update a book
 - Delete a book
 
+(Basic CRUD)
+
 I am just mocking a database at the moment, using a simple array, but maybe I will integrate a real database later.
