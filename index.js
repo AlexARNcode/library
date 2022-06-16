@@ -1,11 +1,10 @@
+import express from 'express';
+import bodyParser from 'body-parser';
 
-const app = require('express')();
+const app = express();
 const PORT = 8080;
-const bp = require('body-parser');
-const res = require('express/lib/response');
 
-app.use(bp.json())
-app.use(bp.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 app.listen(
     PORT,
@@ -13,7 +12,7 @@ app.listen(
 );
 
 let id = 0
-books = [];
+let books = [];
 
 // Create a new book
 app.post('/books', (req, res) => {
