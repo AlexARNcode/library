@@ -12,12 +12,10 @@ app.listen(
     console.log(`Alive on http://localhost:${PORT}`)
 );
 
-// let id = 0
 let books = [];
 
 // Create a new book
 app.post('/books', (req, res) => {
-    // id += 1
     books.push({ id: uuidv4() ,... req.body })
 
     res.send({
@@ -39,7 +37,6 @@ app.get('/books/:id', (req, res) => {
 
 // Update a book
 app.patch('/books/:id', (req, res) => {
-    console.log(req.body)
     const { name, year, category } = req.body
     const book = books.find((book) => book.id == req.params.id)
 
