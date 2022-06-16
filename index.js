@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
 const PORT = 8080;
@@ -11,13 +12,13 @@ app.listen(
     console.log(`Alive on http://localhost:${PORT}`)
 );
 
-let id = 0
+// let id = 0
 let books = [];
 
 // Create a new book
 app.post('/books', (req, res) => {
-    id += 1
-    books.push({ id: id ,... req.body })
+    // id += 1
+    books.push({ id: uuidv4() ,... req.body })
 
     res.send({
         message: `The book '${req.body.name}' has been added.`
