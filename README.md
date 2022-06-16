@@ -14,3 +14,5 @@ It is used to manage your books, you can:
 (Basic CRUD)
 
 I am just mocking a database at the moment, using a simple array, but maybe I will integrate a real database later.
+
+You can use the library-insomnia.json file to import it in Insomnia and make requests to the API.
