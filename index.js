@@ -13,7 +13,6 @@ app.listen(
 );
 
 let id = 0
-
 books = [];
 
 // Create
@@ -28,7 +27,7 @@ app.post('/books', (req, res) => {
 
 // Read
 app.get('/books', (req, res) => {
-    res.status(200).send(books)
+    res.send(books)
 })
 
 // Read 2
@@ -40,13 +39,15 @@ app.get('/books/:id', (req, res) => {
 
 // Update
 app.patch('/books/:id', (req, res) => {
+    console.log(req.body)
+    const { name, year, category } = req.body
     const book = books.find((book) => book.id == req.params.id)
 
-    book.name = 'PWEEEEEET'
+    if (name) book.name = name
+    if (year) book.year = year
+    if (category) book.category = category
 
     res.send(`The book '${book.name}' updated`)
-
-    console.log(bookToBeUpdated)
 })
 
 // Delete
@@ -55,4 +56,3 @@ app.delete('/books/:id', (req, res) => {
 
     res.send(`The book with the id ${req.params.id} has been deleted`)
 })
-
