@@ -17,12 +17,10 @@ export const addBook = (req, res) => {
 
     db.query(sql, sqlParams, function (err, result) {
       if (err) throw err;
-      console.log("1 record inserted");
-    });
-
-    res.send({
+      res.send({
         message: `The book '${req.body.name}' has been added.`
-    })
+         })
+    });
 }
 
 export const getBook = (req, res) => {
