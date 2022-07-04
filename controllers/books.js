@@ -1,4 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
+import mysql from 'mysql';
+import dbConfig from '../config/dbConfig.js';
+
+const db = mysql.createConnection(dbConfig);
 
 let books = [];
 
@@ -8,6 +12,16 @@ export const getAllBooks = (req, res) => {
 
 export const addBook = (req, res) => {
     books.push({ id: uuidv4() ,... req.body })
+
+    console.log(req.body.name);
+
+    const sql = `INSERT INTO books (name, year, category) 
+                    VALUES ('${req.body.name}', ${req.body.year}, '${req.body.category}')`;
+
+    db.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("1 record inserted");
+    });
 
     res.send({
         message: `The book '${req.body.name}' has been added.`
