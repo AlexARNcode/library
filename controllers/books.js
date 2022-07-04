@@ -7,7 +7,12 @@ const db = mysql.createConnection(dbConfig);
 let books = [];
 
 export const getAllBooks = (req, res) => {
-    res.send(books)
+    const sql = "SELECT * FROM books";
+
+    db.query(sql, function (err, bookList) {
+        if (err) throw err;
+        res.send(bookList);
+      });
 }
 
 export const addBook = (req, res) => {
