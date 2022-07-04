@@ -16,9 +16,10 @@ export const addBook = (req, res) => {
     console.log(req.body.name);
 
     const sql = `INSERT INTO books (name, year, category) 
-                    VALUES ('${req.body.name}', ${req.body.year}, '${req.body.category}')`;
+                    VALUES (?, ?, ?)`;
+    const sqlParams = [req.body.name, req.body.year, req.body.category];
 
-    db.query(sql, function (err, result) {
+    db.query(sql, sqlParams, function (err, result) {
       if (err) throw err;
       console.log("1 record inserted");
     });
