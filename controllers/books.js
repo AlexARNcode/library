@@ -29,9 +29,13 @@ export const addBook = (req, res) => {
 }
 
 export const getBook = (req, res) => {
-    res.send(
-        books.find((book) => book.id == req.params.id )
-    )
+    const sql = "SELECT * FROM books WHERE id = ?";
+    const sqlParams = [req.params.id];
+
+    db.query(sql, sqlParams, function (err, result) {
+      if (err) throw err;
+      res.send(result)
+    });
 }
 
 export const updateBook = (req, res) => {
