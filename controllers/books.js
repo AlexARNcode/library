@@ -11,10 +11,6 @@ export const getAllBooks = (req, res) => {
 }
 
 export const addBook = (req, res) => {
-    books.push({ id: uuidv4() ,... req.body })
-
-    console.log(req.body.name);
-
     const sql = `INSERT INTO books (name, year, category) 
                     VALUES (?, ?, ?)`;
     const sqlParams = [req.body.name, req.body.year, req.body.category];
