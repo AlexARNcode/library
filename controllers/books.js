@@ -50,7 +50,11 @@ export const updateBook = (req, res) => {
 }
 
 export const deleteBook = (req, res) => {
-    books = books.filter((book) => book.id != req.params.id)
+    const sql = "DELETE FROM books WHERE id = ?";
+    const sqlParams = [req.params.id];
 
-    res.send(`The book with the id ${req.params.id} has been deleted`)
+    db.query(sql, sqlParams, function (err, result) {
+      if (err) throw err;
+      res.send(`The book has been deleted`);
+    });
 }
