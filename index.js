@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import booksRoutes from './routes/books.js'
 import mysql from 'mysql';
-import dbConfig from './config/config.js';
+import dbConfig from './config/dbConfig.js';
 
 const app = express();
 const PORT = 8080;
