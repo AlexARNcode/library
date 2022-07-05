@@ -4,8 +4,6 @@ import dbConfig from '../config/dbConfig.js';
 
 const db = mysql.createConnection(dbConfig);
 
-let books = [];
-
 export const getAllBooks = (req, res) => {
     const sql = "SELECT * FROM books";
 
