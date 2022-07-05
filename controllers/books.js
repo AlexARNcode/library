@@ -40,13 +40,14 @@ export const getBook = (req, res) => {
 
 export const updateBook = (req, res) => {
     const { name, year, category } = req.body
-    const book = books.find((book) => book.id == req.params.id)
 
-    if (name) book.name = name
-    if (year) book.year = year
-    if (category) book.category = category
+    const sql = "UPDATE books SET name = ?, year = ?, category = ? WHERE id = ?";
+    const sqlParams = [name, year, category, req.params.id];
 
-    res.send(`The book '${book.name}' updated`)
+    db.query(sql, sqlParams, function (err, result) {
+      if (err) throw err;
+      res.send({message: `The book '${name}' has been updated.`})
+    });
 }
 
 export const deleteBook = (req, res) => {
