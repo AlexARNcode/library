@@ -1,38 +1,58 @@
-import { v4 as uuidv4 } from 'uuid';
+import mysql from 'mysql';
+import dbConfig from '../config/dbConfig.js';
 
-let books = [];
+const db = mysql.createConnection(dbConfig);
 
 export const getAllBooks = (req, res) => {
-    res.send(books)
+    const sql = "SELECT * FROM books";
+
+    db.query(sql, function (err, bookList) {
+        if (err) throw err;
+        res.send(bookList);
+      });
 }
 
 export const addBook = (req, res) => {
-    books.push({ id: uuidv4() ,... req.body })
+    const sql = `INSERT INTO books (name, year, category) 
+                    VALUES (?, ?, ?)`;
+    const sqlParams = [req.body.name, req.body.year, req.body.category];
 
-    res.send({
+    db.query(sql, sqlParams, function (err, result) {
+      if (err) throw err;
+      res.send({
         message: `The book '${req.body.name}' has been added.`
-    })
+         })
+    });
 }
 
 export const getBook = (req, res) => {
-    res.send(
-        books.find((book) => book.id == req.params.id )
-    )
+    const sql = "SELECT * FROM books WHERE id = ?";
+    const sqlParams = [req.params.id];
+
+    db.query(sql, sqlParams, function (err, result) {
+      if (err) throw err;
+      res.send(result)
+    });
 }
 
 export const updateBook = (req, res) => {
     const { name, year, category } = req.body
-    const book = books.find((book) => book.id == req.params.id)
 
-    if (name) book.name = name
-    if (year) book.year = year
-    if (category) book.category = category
+    const sql = "UPDATE books SET name = ?, year = ?, category = ? WHERE id = ?";
+    const sqlParams = [name, year, category, req.params.id];
 
-    res.send(`The book '${book.name}' updated`)
+    db.query(sql, sqlParams, function (err, result) {
+      if (err) throw err;
+      res.send({message: `The book '${name}' has been updated.`})
+    });
 }
 
 export const deleteBook = (req, res) => {
-    books = books.filter((book) => book.id != req.params.id)
+    const sql = "DELETE FROM books WHERE id = ?";
+    const sqlParams = [req.params.id];
 
-    res.send(`The book with the id ${req.params.id} has been deleted`)
+    db.query(sql, sqlParams, function (err, result) {
+      if (err) throw err;
+      res.send(`The book has been deleted`);
+    });
 }
