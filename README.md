@@ -3,21 +3,28 @@
 
 ![This is an image](https://github.com/aleen42/badges/raw/master/src/node.svg)
 
-This is a simple backend REST API that I have created to learn NodeJS.
-It is used to manage your books, you can:
-- See the list of all books of the library
-- See a specific book
-- Add a new book
-- Update a book
-- Delete a book
+### General
+This is a web application to manage books.
+
+### Technical
+##### Backend
+REST API with NodeJS and Express.
+
+##### Frontend
+React
 
 ### Pre-Requisites
 - You need to have a mysql server running locally on your computer.
 
 ### How to run
+#### Backend
 - `git clone https://github.com/AlexARNcode/library`
 - `cd library`
 - Rename `dbConfig.dist` to `dbConfig.js` and edit the properties `host, user, password, database` according to your needs.
+- `npm start`
+
+#### Frontend
+- `cd front`
 - `npm start`
 
 ### Avalaible routes
