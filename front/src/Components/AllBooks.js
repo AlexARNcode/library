@@ -1,5 +1,10 @@
 import React from "react";
 import { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Link from "@mui/material/Link";
 
 const axios = require('axios').default;
 
@@ -26,13 +31,23 @@ export default function AllBooks() {
     return (
         <div>
             {books && books.map((book) => (
-            <>
-                <h1 key={book.id}>
-                    <a href="#" onClick={() => getBook(book.id)}>{book.name}</a>
-                </h1>
-                <i>Année de parution : {book.year}</i>
-                <p>Catégorie : {book.category}</p>
-            </>
+            <Link underline="none" href="#" onClick={() => getBook(book.id)}>
+                <Box>
+                    <Card key={book.id} variant="outlined" sx={{ maxWidth: 1000 }}>
+                        <CardContent>
+                            <Typography variant="h2">
+                                {book.name}
+                            </Typography>
+                            <Typography variant="subtitle1">
+                                Année de parution : {book.year}
+                            </Typography>
+                            <Typography color="text.secondary">
+                                Catégorie : {book.category}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Box>
+            </Link>
             ))}
       </div>
     );      
