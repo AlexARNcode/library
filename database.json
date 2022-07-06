@@ -1,0 +1,16 @@
+{
+    "dev": {
+        "driver": "mysql",
+        "user": "root",
+        "password": "@Jttqvb9u!",
+        "host": "localhost",
+        "database": "library"
+    },
+    "other": {
+        "driver": "mysql",
+        "user": "root",
+        "password": "@Jttqvb9u!",
+        "host": "localhost",
+        "database": "library"
+    }
+  }
