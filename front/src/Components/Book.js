@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 
 const axios = require('axios').default;
 
@@ -10,8 +11,10 @@ export default function Book() {
     const [bookYear, setBookYear] = useState();
     const [bookCategory, setBookCategory] = useState();
 
+    let params = useParams();
+
     useEffect(() => {
-        axios.get('http://localhost:8080/books/12')
+        axios.get(`http://localhost:8080/books/${params.id}`)
         .then(function (response) {
         setLoader(true);
         setBookId(response.data[0].id);
@@ -20,10 +23,10 @@ export default function Book() {
         setBookCategory(response.data[0].category);
         })
         .catch(function (error) {
-        console.log(error);
+            console.log(error);
         })
         .then(function () {
-        setLoader(false);
+            setLoader(false);
         });
     }, [])  
 
