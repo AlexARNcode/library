@@ -1,9 +1,11 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import { Box, Card, CardContent, Typography } from '@mui/material';
+import { Box, Card, CardActions, CardContent, Typography } from '@mui/material';
 import { Container } from "@mui/material";
 import { Link } from "react-router-dom";
+import CustomButton from "./CustomButton";
+import deleteBook from "../helper/api";
 
 const axios = require('axios').default;
 
@@ -34,7 +36,7 @@ export default function Book() {
 
     return (
         <Container align="center">
-            <Link to="/">Retour</Link>
+            <Link to="/" underline="none">Retour</Link>
             <Box>
                 <Card key={bookId} variant="outlined" sx={{ maxWidth: 1000 }}>
                     <CardContent>
@@ -48,6 +50,11 @@ export default function Book() {
                             Catégorie : {bookCategory}
                         </Typography>
                     </CardContent>
+                    <CardActions>
+                        <Container align="center">
+                            <CustomButton text='DELETE' onClick={() => deleteBook(bookId)}></CustomButton>
+                        </Container>
+                    </CardActions>
                 </Card>
             </Box>
         </Container>

@@ -32,7 +32,7 @@ export default function AllBooks() {
                     <Card key={book.id} variant="outlined" sx={{ maxWidth: 1000 }}>
                         <CardContent>
                             <Typography variant="h2">
-                                {book.name} {book.id}  
+                                {book.name}
                             </Typography>
                             <Typography variant="subtitle1">
                                 Année de parution : {book.year}
