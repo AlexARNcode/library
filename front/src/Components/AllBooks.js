@@ -27,7 +27,7 @@ export default function AllBooks() {
     return (
         <div>
             {books && books.map((book) => (
-            <Link to={`/book/${book.id}`}>
+            <Link to={`/book/${book.id}`} style={{ textDecoration: 'none' }}>
                 <Box>
                     <Card key={book.id} variant="outlined" sx={{ maxWidth: 1000 }}>
                         <CardContent>
