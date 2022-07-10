@@ -1,7 +1,9 @@
 import express from "express";
 import { addBook, deleteBook, getAllBooks, getBook, updateBook } from "../controllers/books.js";
+import cors from 'cors';
 
 const router = express.Router();
+router.use(cors())
 
 router.get('/', getAllBooks);
 

@@ -1,10 +1,13 @@
+import { Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 export default function Header () {
     return (
-        <Typography align="center" variant="h1">
-            My books
-        </Typography>
+        <Container sx={{ mb: 5 }}>
+            <Typography align="center" variant="h1">
+                My books
+            </Typography>
+        </Container>
     )
 }
 

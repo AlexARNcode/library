@@ -5,6 +5,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Link } from "react-router-dom";
+import CustomButton from "./CustomButton";
 
 const axios = require('axios').default;
 
@@ -26,13 +27,17 @@ export default function AllBooks() {
 
     return (
         <div>
+            <Link to="/book/add">
+                <CustomButton text='ADD A BOOK' sx={{ mb: 2 }}></CustomButton>
+            </Link>
+            
             {books && books.map((book) => (
-            <Link to={`/book/${book.id}`}>
+            <Link to={`/book/${book.id}`} style={{ textDecoration: 'none' }}>
                 <Box>
                     <Card key={book.id} variant="outlined" sx={{ maxWidth: 1000 }}>
                         <CardContent>
                             <Typography variant="h2">
-                                {book.name} {book.id}  
+                                {book.name}
                             </Typography>
                             <Typography variant="subtitle1">
                                 Année de parution : {book.year}
