@@ -6,6 +6,8 @@ import { Container } from "@mui/material";
 import { Link } from "react-router-dom";
 import CustomButton from "./CustomButton";
 import deleteBook from "../helper/api/deleteBook";
+import ReturnHome from "./ReturnHome";
+import Header from "./Header";
 
 const axios = require('axios').default;
 
@@ -36,7 +38,8 @@ export default function Book() {
 
     return (
         <Container align="center">
-            <Link to="/" underline="none">Retour</Link>
+            <Header></Header>
+            <ReturnHome />
             <Box>
                 <Card key={bookId} variant="outlined" sx={{ maxWidth: 1000 }}>
                     <CardContent>

@@ -7,7 +7,7 @@ export default function addBook(name, year, category) {
         category: category
       })
       .then(function (response) {
-        
+        alert(`Book "${name}" added !`);
       })
       .catch(function (error) {
         console.log(error);
