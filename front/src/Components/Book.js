@@ -1,13 +1,12 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import { Box, Card, CardActions, CardContent, Typography } from '@mui/material';
-import { Container } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Card, CardActions, CardContent, TextField, Typography, Container } from '@mui/material';
 import CustomButton from "./CustomButton";
 import deleteBook from "../helper/api/deleteBook";
 import ReturnHome from "./ReturnHome";
 import Header from "./Header";
+import updateBook from "../helper/api/updateBook";
 
 const axios = require('axios').default;
 
@@ -16,6 +15,10 @@ export default function Book() {
     const [bookName, setBookName] = useState();
     const [bookYear, setBookYear] = useState();
     const [bookCategory, setBookCategory] = useState();
+    const [isEditing, setIsEditing] = useState(false);
+    const bookNameField = React.useRef(null);
+    const bookYearField = React.useRef(null);
+    const bookCategoryField = React.useRef(null);
 
     let params = useParams();
 
@@ -36,10 +39,44 @@ export default function Book() {
         });
     }, [])  
 
+    function toggleEdit() {
+        if (isEditing === true) {
+            setIsEditing(false);
+        } else {
+            setIsEditing(true)
+        }
+    }
+
     return (
         <Container align="center">
             <Header></Header>
             <ReturnHome />
+            
+            {isEditing && (
+                 <Container sx={{ mb: 4 }}>
+                <Typography variant="h5" sx={{ mb: 3 }}>Update "{bookName}"</Typography>
+                 <Box>
+                     <TextField id="filled-basic" label="Name" variant="outlined" defaultValue={bookName} inputRef={bookNameField} />
+                 </Box>
+                 <Box>
+                     <TextField id="filled-basic" label="Year" variant="outlined" defaultValue={bookYear} inputRef={bookYearField} />
+                 </Box>
+                 <Box>
+                     <TextField id="filled-basic" label="Category" variant="outlined" defaultValue={bookCategory} inputRef={bookCategoryField} />
+                 </Box>
+                 <CustomButton 
+                    text='SAVE' 
+                    sx={{ m: 1 }} 
+                    onClick={() => updateBook(bookId, bookNameField.current.value, bookYearField.current.value, bookCategoryField.current.value)}>
+                </CustomButton>
+                <CustomButton 
+                    text='CANCEL' 
+                    sx={{ m: 1 }} 
+                    onClick={() => toggleEdit()}>
+                    </CustomButton>
+             </Container>
+            )}
+           
             <Box>
                 <Card key={bookId} variant="outlined" sx={{ maxWidth: 1000 }}>
                     <CardContent>
@@ -55,7 +92,12 @@ export default function Book() {
                     </CardContent>
                     <CardActions>
                         <Container align="center">
-                            <CustomButton text='DELETE' onClick={() => deleteBook(bookId)}></CustomButton>
+                            {isEditing === false && (
+                                <>
+                                <CustomButton text='DELETE' sx={{ m: 1 }} onClick={() => deleteBook(bookId)}></CustomButton>
+                                <CustomButton text='UPDATE' sx={{ m: 1 }} onClick={() => toggleEdit()}></CustomButton>
+                                </> 
+                            )}
                         </Container>
                     </CardActions>
                 </Card>
