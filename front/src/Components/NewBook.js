@@ -10,6 +10,15 @@ export default function NewBook() {
     const [bookName, setBookName] = useState("");
     const [bookYear, setBookYear] = useState("");
     const [bookCategory, setBookCategory] = useState("");
+    const nameField = React.useRef(null);
+    const yearField = React.useRef(null);
+    const categoryField = React.useRef(null);
+
+    function resetForm() {
+        nameField.current.value="";
+        yearField.current.value="";
+        categoryField.current.value="";
+    }
 
     return (
         <Container align="center">
@@ -27,14 +36,16 @@ export default function NewBook() {
             </Typography>
   
                 <Box>
-                <TextField 
-                        value={bookName}
-                        onChange={(e) => {
-                            setBookName(e.target.value);
-                        }}
-                        id="outlined-basic" 
-                        label="Name" 
-                        variant="outlined" />
+                    <TextField 
+                            value={bookName}
+                            onChange={(e) => {
+                                setBookName(e.target.value);
+                            }}
+                            id="outlined-basic" 
+                            label="Name" 
+                            variant="outlined" 
+                            inputRef={nameField}
+                            />
                 </Box>
                 <Box>
                     <TextField 
@@ -44,7 +55,9 @@ export default function NewBook() {
                             }}
                             id="outlined-basic" 
                             label="Publication year" 
-                            variant="outlined" />
+                            variant="outlined"
+                            inputRef={yearField}
+                            />
                 </Box>
                 <Box>
                 <TextField 
@@ -54,16 +67,20 @@ export default function NewBook() {
                         }}
                         id="outlined-basic" 
                         label="Category" 
-                        variant="outlined" />
+                        variant="outlined"
+                        inputRef={categoryField}
+                        />
                 </Box>
                     
                     <CustomButton 
                         text="SAVE" 
                         sx={{ mt: 3 }}
-                        onClick={() => addBook(bookName, bookYear, bookCategory)}>
+                        onClick={() => {
+                            addBook(bookName, bookYear, bookCategory);
+                            resetForm();
+                            }
+                        }>
                     </CustomButton>
-           
-                
         </Container>
     );      
 }
