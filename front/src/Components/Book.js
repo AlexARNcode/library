@@ -5,7 +5,7 @@ import { Box, Card, CardActions, CardContent, Typography } from '@mui/material';
 import { Container } from "@mui/material";
 import { Link } from "react-router-dom";
 import CustomButton from "./CustomButton";
-import deleteBook from "../helper/api";
+import deleteBook from "../helper/api/deleteBook";
 
 const axios = require('axios').default;
 
