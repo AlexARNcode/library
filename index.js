@@ -36,7 +36,6 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 app.use(bodyParser.json())
 app.use('/books', booksRoutes);
 
-
 app.listen(
     PORT,
     console.log(`Alive on http://localhost:${PORT}`)
