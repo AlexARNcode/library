@@ -39,8 +39,12 @@ export default function Book() {
         });
     }, [])  
 
-    function allowEditing() {
-        isEditing === true ? setIsEditing(false) : setIsEditing(true)
+    function toggleEdit() {
+        if (isEditing === true) {
+            setIsEditing(false);
+        } else {
+            setIsEditing(true)
+        }
     }
 
     return (
@@ -50,6 +54,7 @@ export default function Book() {
             
             {isEditing && (
                  <Container sx={{ mb: 4 }}>
+                <Typography variant="h5" sx={{ mb: 3 }}>Update "{bookName}"</Typography>
                  <Box>
                      <TextField id="filled-basic" label="Name" variant="outlined" defaultValue={bookName} inputRef={bookNameField} />
                  </Box>
@@ -63,6 +68,11 @@ export default function Book() {
                     text='SAVE' 
                     sx={{ m: 1 }} 
                     onClick={() => updateBook(bookId, bookNameField.current.value, bookYearField.current.value, bookCategoryField.current.value)}>
+                </CustomButton>
+                <CustomButton 
+                    text='CANCEL' 
+                    sx={{ m: 1 }} 
+                    onClick={() => toggleEdit()}>
                     </CustomButton>
              </Container>
             )}
@@ -82,8 +92,12 @@ export default function Book() {
                     </CardContent>
                     <CardActions>
                         <Container align="center">
-                            <CustomButton text='DELETE' sx={{ m: 1 }} onClick={() => deleteBook(bookId)}></CustomButton>
-                            <CustomButton text='UPDATE' sx={{ m: 1 }} onClick={() => allowEditing(bookId)}></CustomButton>
+                            {isEditing === false && (
+                                <>
+                                <CustomButton text='DELETE' sx={{ m: 1 }} onClick={() => deleteBook(bookId)}></CustomButton>
+                                <CustomButton text='UPDATE' sx={{ m: 1 }} onClick={() => toggleEdit()}></CustomButton>
+                                </> 
+                            )}
                         </Container>
                     </CardActions>
                 </Card>
