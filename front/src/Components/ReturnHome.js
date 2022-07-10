@@ -7,9 +7,10 @@ export default function ReturnHome() {
             <Link to="/" style={{ 
                     fontFamily: "Roboto", 
                     textDecoration: "none",
+                    color: "#4E5761",
                     }}>
                         Retour
-            </Link>
+            </Link>     
     </Box>
     )
 

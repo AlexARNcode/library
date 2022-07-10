@@ -6,6 +6,7 @@ import CustomButton from "./CustomButton";
 import { useState } from "react";
 import addBook from "../helper/api/addBook";
 import ReturnHome from "./ReturnHome";
+import Header from "./Header";
 
 export default function NewBook() {    
     const [bookName, setBookName] = useState("");
@@ -23,6 +24,7 @@ export default function NewBook() {
 
     return (
         <Container align="center">
+            <Header />
             <ReturnHome></ReturnHome>
 
             <Typography align="center" variant="h2" sx={{ mb: 3 }}>
