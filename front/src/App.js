@@ -1,11 +1,8 @@
-import AllBooks from './Components/AllBooks.js';
-import Header from './Components/Header.js';
+import AllBooks from './Components/AllBooks';
+import Header from './Components/Header';
 import Container from '@mui/material/Container';
 
-const axios = require('axios').default;
-
 function App() {
-
   return (
     <>
     <Container align="center">
