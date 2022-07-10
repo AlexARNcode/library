@@ -5,6 +5,7 @@ import React from "react";
 import CustomButton from "./CustomButton";
 import { useState } from "react";
 import addBook from "../helper/api/addBook";
+import ReturnHome from "./ReturnHome";
 
 export default function NewBook() {    
     const [bookName, setBookName] = useState("");
@@ -22,14 +23,7 @@ export default function NewBook() {
 
     return (
         <Container align="center">
-            <Box sx={{ mb: 3 }}>
-                <Link to="/" style={{ 
-                        fontFamily: "Roboto", 
-                        textDecoration: "none",
-                        }}>
-                            Retour
-                </Link>
-            </Box>
+            <ReturnHome></ReturnHome>
 
             <Typography align="center" variant="h2" sx={{ mb: 3 }}>
                 New book
