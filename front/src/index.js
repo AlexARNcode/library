@@ -8,6 +8,8 @@ import {
 import App from './App';
 import Book from './Components/Book';
 import NewBook from './Components/NewBook';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +18,8 @@ root.render(
     <Route path="/" element={<App />} />
     <Route path="book/:id" element={<Book />} />
     <Route path="book/add" element={<NewBook />} />
+    <Route path="/register" element={<Register />} />
+    <Route path="/login" element={<Login />} />
   </Routes>
 </BrowserRouter>
 );
