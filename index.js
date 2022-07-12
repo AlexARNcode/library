@@ -4,7 +4,7 @@ import booksRoutes from './routes/books.js';
 import usersRoutes from './routes/users.js';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
-import { swaggerOptions } from './swaggerOptions.js';
+import { swaggerOptions } from './routes/swaggerOptions.js';
 
 const app = express();
 const PORT = 8080;
