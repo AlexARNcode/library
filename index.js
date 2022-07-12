@@ -4,34 +4,11 @@ import booksRoutes from './routes/books.js';
 import usersRoutes from './routes/users.js';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
+import { swaggerOptions } from './routes/swaggerOptions.js';
 
 const app = express();
 const PORT = 8080;
-
-const options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Library API",
-      version: "1.0.0",
-      description: "An API to manage your books",
-      contact: {
-        name: "AlexARNcode",
-        url: "https://github.com/AlexARNcode/library",
-      },
-    },
-
-    servers: [
-      {
-        url: "http://localhost:8080",
-        description: "Library API documentation",
-      },
-    ],
-  },
-  apis: ["./routes/swagger.js"],
-};
-
-const specs = swaggerJsDoc(options);
+const specs = swaggerJsDoc(swaggerOptions);
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 app.use(bodyParser.json())
