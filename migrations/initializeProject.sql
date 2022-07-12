@@ -8,12 +8,14 @@ CREATE TABLE `books` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb3;
 
-CREATE TABLE `library`.`users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(200) NOT NULL,
-  `password` VARCHAR(200) NOT NULL,
-  `role` VARCHAR(100) NOT NULL,
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `role` varchar(100) NOT NULL DEFAULT 'user',
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 

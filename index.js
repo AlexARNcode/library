@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import booksRoutes from './routes/books.js';
+import usersRoutes from './routes/users.js';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJsDoc from 'swagger-jsdoc';
 
@@ -31,10 +32,11 @@ const options = {
 };
 
 const specs = swaggerJsDoc(options);
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 app.use(bodyParser.json())
 app.use('/books', booksRoutes);
+app.use('/users', usersRoutes);
 
 app.listen(
     PORT,

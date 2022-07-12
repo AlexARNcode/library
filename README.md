@@ -14,7 +14,8 @@ REST API with NodeJS and Express.
 React
 
 ### Pre-Requisites
-- You need to have a mysql server running locally on your computer.
+- Mysql server running locally on your computer.
+- Database called `library` and two tables (`books`and `users`) : Use the `migrations/initializeProject.sql` to create them. 
 
 ### How to run
 #### Backend
