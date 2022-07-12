@@ -1,5 +1,7 @@
 import mysql from 'mysql';
 import dbConfig from '../config/dbConfig.js';
+import { hashPassword } from '../helpers/passwords.js';
+
 
 const db = mysql.createConnection(dbConfig);
 
@@ -15,12 +17,12 @@ export function findUserByEmail(email, callback) {
 
 export function insertNewUser(email, password, callback) {
     const sql = "INSERT INTO users (email, password) VALUES (?, ?)";
-    const sqlParams = [email, password];
+    const sqlParams = [email, hashPassword(password)];
 
-    db.query(sql, sqlParams, function (err, result) {
-        if (err) throw err;
-        return callback();
-      });
+    db.query(sql, sqlParams, function (err) {
+      if (err) throw err; 
+      return callback(email)
+    });
 }
 
 export default {findUserByEmail, insertNewUser}
