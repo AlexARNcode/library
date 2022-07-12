@@ -124,3 +124,30 @@
  *               type: object
  *               example: {"message":"The book 'On a roulé sur la Lune' has been updated."}
 */
+
+/**
+ * @swagger
+ * /users:
+ *   post:
+ *     summary: CREATE a new user
+ *     description: Create a new user, by giving it's email and password 
+ *     parameters:
+ *       - in: body
+ *         name: email
+ *         type: string
+ *         required: true
+ *         description: Email of the user
+ *         example: test@test.com  
+ *       - in: body
+ *         name: password   
+ *         type: string
+ *         required: true    
+ *         example: randomPassword123!         
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               example: "New user test@test.com created !"
+ */
