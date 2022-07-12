@@ -19,7 +19,7 @@ export function insertNewUser(email, password, callback) {
 
     db.query(sql, sqlParams, function (err, result) {
         if (err) throw err;
-        return callback(result)
+        return callback();
       });
 }
 

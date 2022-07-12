@@ -11,8 +11,8 @@ export const createUser = (req, res) => {
         if (result.length !== 0) {
             res.send("User already exists !")
         } else {
-            insertNewUser(userEmail, req.body.password, function(result) {
-                res.send(result)
+            insertNewUser(userEmail, req.body.password, function() {
+                res.send(`New user "${userEmail}" created !`);    
             })    
         }    
     })
