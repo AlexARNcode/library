@@ -33,8 +33,7 @@ export const logUser = (req, res) => {
         if (result.length > 0) { 
             const userPasswordInDB = result[0].password
             if (comparePasswords(userSentPassword, userPasswordInDB)) {
-                console.log("Will log !");
-                const secretKey = "temporary";
+                const secretKey = "RandomSecretKey14857@!";
 
                 const token = jwt.sign({ user: userEmail }, secretKey, { expiresIn: "3 hours" });
 
