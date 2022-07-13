@@ -6,4 +6,8 @@ export function hashPassword(plainPassword) {
     return bcrypt.hashSync(plainPassword, saltRounds);
 }
 
-export default { hashPassword }
+export function comparePasswords(userSentPassword, userPasswordInDb) {
+    return bcrypt.compareSync(userSentPassword, userPasswordInDb)
+}
+
+export default { hashPassword, comparePasswords }
