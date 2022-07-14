@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-const SECRET_KEY = "RandomSecretKey14857@!";
 
 export default async function checkJWT (req, res, next)  {
     let token = req.headers['x-access-token'] || req.headers['authorization'];
@@ -8,7 +7,7 @@ export default async function checkJWT (req, res, next)  {
     }
 
     if (token) {
-        jwt.verify(token, SECRET_KEY, (err, decoded) => {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
             if (err) {
                 return res.status(401).json('token_not_valid');
             } else {
@@ -18,7 +17,7 @@ export default async function checkJWT (req, res, next)  {
                 const newToken  = jwt.sign({
                     user : decoded.user
                 },
-                SECRET_KEY,
+                process.env.ACCESS_TOKEN_SECRET,
                 {
                     expiresIn: expiresIn
                 });

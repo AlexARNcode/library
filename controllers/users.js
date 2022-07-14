@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 import mysql from 'mysql';
 import dbConfig from '../config/dbConfig.js';
 import { findUserByEmail, insertNewUser } from '../repositories/usersRepository.js';
@@ -33,9 +36,7 @@ export const logUser = (req, res) => {
         if (result.length > 0) { 
             const userPasswordInDB = result[0].password
             if (comparePasswords(userSentPassword, userPasswordInDB)) {
-                const secretKey = "RandomSecretKey14857@!";
-
-                const token = jwt.sign({ user: userEmail }, secretKey, { expiresIn: "3 hours" });
+                const token = jwt.sign({ user: userEmail }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "3 hours" });
 
                 res.header('Authorization', 'Bearer ' + token);
                 res.status(200).json('Sucessfully logged in');
