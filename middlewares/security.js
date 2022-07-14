@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import apiErrors from '../errors/apiErrors.js';
 
 export default async function checkJWT (req, res, next)  {
     let token = req.headers['x-access-token'] || req.headers['authorization'];
@@ -9,7 +10,7 @@ export default async function checkJWT (req, res, next)  {
     if (token) {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
             if (err) {
-                return res.status(401).json('token_not_valid');
+                return res.status(401).json(apiErrors.INVALID_JWT_TOKEN.userMessage);
             } else {
                 req.decoded = decoded;
 
@@ -27,6 +28,6 @@ export default async function checkJWT (req, res, next)  {
             }
         });
     } else {
-        return res.status(401).json('token_required');
+        return res.status(401).json(apiErrors.JWT_TOKEN_REQUIRED.userMessage);
     }
 }
