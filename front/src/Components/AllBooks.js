@@ -6,11 +6,17 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Link } from "react-router-dom";
 import CustomButton from "./CustomButton";
+import setAuthToken from "../helper/authToken";
 
 const axios = require('axios').default;
 
 export default function AllBooks() {    
     const [books, setBooks] = useState();
+
+    const token = localStorage.getItem("token");
+    if (token) {
+        setAuthToken(token);
+    }
 
     useEffect(() => {
         axios.get('http://localhost:8080/books/')

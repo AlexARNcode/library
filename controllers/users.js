@@ -15,7 +15,7 @@ export const createUser = (req, res) => {
 
     findUserByEmail(userEmail, function(result) {
         result.length !== 0 ? 
-            res.send(`User ${userEmail}" already exists !`) 
+            res.status(409).send(`User "${userEmail}" already exists !`) 
             : 
             insertNewUser(userEmail.toLowerCase(), req.body.password, function(email) {
             res.send(`New user "${email}" created !`);    
@@ -37,9 +37,11 @@ export const logUser = (req, res) => {
             const userPasswordInDB = result[0].password
             if (comparePasswords(userSentPassword, userPasswordInDB)) {
                 const token = jwt.sign({ user: userEmail }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "3 hours" });
-
-                res.header('Authorization', 'Bearer ' + token);
-                res.status(200).json('Sucessfully logged in');
+        
+                res.status(200).json({
+                    token: token,
+                    message: 'Successfully logged in!'
+                });
             } else {
                 res.send(apiErrors.WRONG_CREDENTIALS.userMessage)
             }

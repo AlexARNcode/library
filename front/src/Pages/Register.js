@@ -9,11 +9,25 @@ const axios = require('axios').default;
 export default function Register() {
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
+    const [emailErrorMessage, setEmailErrorMessage] = useState("")
+    const [passwordErrorMessage, setPasswordErrorMessage] = useState("")
+    const [userCreatedMessage, setUserCreatedMessage] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
 
     function handleFormSubmit(e) {
+        setEmailErrorMessage("")
+        setPasswordErrorMessage("")
+        setUserCreatedMessage("")
+        setErrorMessage("")
+
         if (!isValidEmail(userEmail)) {
-            alert('Invalid email address !')
-            throw new Error('Invalid email addres !')
+            setEmailErrorMessage("Invalid email address ! Your email shoud look like example@domain.com")
+            throw new Error('Invalid email address !')
+        }
+
+        if (!userPassword) {
+            setPasswordErrorMessage("Invalid password !")
+            throw new Error('Invalid password') 
         }
 
         axios.post('http://localhost:8080/users', {
@@ -21,10 +35,10 @@ export default function Register() {
             password: userPassword
         })
         .then(function (response) {
-            alert(response.data)
+            setUserCreatedMessage(response.data)
         })
         .catch(function (error) {
-            console.log(error);
+            setErrorMessage(error.response.data)
         })
         .then(function () {
 
@@ -51,6 +65,7 @@ export default function Register() {
                 id="filled-basic" 
                 label="password" 
                 variant="outlined" 
+                type="password"
                 value={userPassword}
                 onChange={(e) => {
                     setUserPassword(e.target.value)
@@ -58,12 +73,37 @@ export default function Register() {
             />
         </Box> 
         <CustomButton 
-            text="LOGIN"
+            text="REGISTER"
             onClick={(e) => {
                 handleFormSubmit(e)
             }}
             >
             </CustomButton>
+
+            {emailErrorMessage && (
+                <Typography sx={{ color: "red", mt: 2 }}>
+                    {emailErrorMessage}
+                </Typography>
+            )}
+
+            {passwordErrorMessage && (
+                <Typography sx={{ color: "red", mt: 2 }}>
+                    {passwordErrorMessage}
+                </Typography>
+            )}
+
+            {userCreatedMessage && (
+                <Typography sx={{ color: "green", mt: 2 }}>
+                    {userCreatedMessage}
+                </Typography>
+            )}
+
+            {errorMessage && (
+                <Typography sx={{ color: "red", mt: 2 }}>
+                    {errorMessage}
+                </Typography>
+            )}
+ 
     </Container> 
     )
 }
