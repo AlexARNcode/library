@@ -7,6 +7,7 @@ import { useState } from "react";
 import addBook from "../helper/api/addBook";
 import ReturnHome from "./ReturnHome";
 import Header from "./Header";
+import setAuthToken from "../helper/authToken";
 
 export default function NewBook() {    
     const [bookName, setBookName] = useState("");
@@ -15,6 +16,12 @@ export default function NewBook() {
     const nameField = React.useRef(null);
     const yearField = React.useRef(null);
     const categoryField = React.useRef(null);
+
+    const token = localStorage.getItem("token");
+    console.log("Token : " + token)
+    if (token) {
+        setAuthToken(token);
+    }
 
     function resetForm() {
         nameField.current.value="";

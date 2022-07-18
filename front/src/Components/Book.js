@@ -7,6 +7,7 @@ import deleteBook from "../helper/api/deleteBook";
 import ReturnHome from "./ReturnHome";
 import Header from "./Header";
 import updateBook from "../helper/api/updateBook";
+import setAuthToken from "../helper/authToken";
 
 const axios = require('axios').default;
 
@@ -21,6 +22,12 @@ export default function Book() {
     const bookCategoryField = React.useRef(null);
 
     let params = useParams();
+
+    const token = localStorage.getItem("token");
+    console.log("Token : " + token)
+    if (token) {
+        setAuthToken(token);
+    }
 
     useEffect(() => {
         axios.get(`http://localhost:8080/books/${params.id}`)
