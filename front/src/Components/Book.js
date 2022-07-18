@@ -24,7 +24,6 @@ export default function Book() {
     let params = useParams();
 
     const token = localStorage.getItem("token");
-    console.log("Token : " + token)
     if (token) {
         setAuthToken(token);
     }

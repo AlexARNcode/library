@@ -18,7 +18,6 @@ export default function NewBook() {
     const categoryField = React.useRef(null);
 
     const token = localStorage.getItem("token");
-    console.log("Token : " + token)
     if (token) {
         setAuthToken(token);
     }

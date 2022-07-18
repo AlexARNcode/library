@@ -14,7 +14,6 @@ export default function AllBooks() {
     const [books, setBooks] = useState();
 
     const token = localStorage.getItem("token");
-    console.log("Token : " + token)
     if (token) {
         setAuthToken(token);
     }
