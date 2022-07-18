@@ -37,9 +37,11 @@ export const logUser = (req, res) => {
             const userPasswordInDB = result[0].password
             if (comparePasswords(userSentPassword, userPasswordInDB)) {
                 const token = jwt.sign({ user: userEmail }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "3 hours" });
-
-                res.header('Authorization', 'Bearer ' + token);
-                res.status(200).json('Sucessfully logged in');
+        
+                res.status(200).json({
+                    token: token,
+                    message: 'Successfully logged in!'
+                });
             } else {
                 res.send(apiErrors.WRONG_CREDENTIALS.userMessage)
             }
