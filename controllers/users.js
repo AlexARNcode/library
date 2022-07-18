@@ -15,7 +15,7 @@ export const createUser = (req, res) => {
 
     findUserByEmail(userEmail, function(result) {
         result.length !== 0 ? 
-            res.send(`User ${userEmail}" already exists !`) 
+            res.status(409).send(`User "${userEmail}" already exists !`) 
             : 
             insertNewUser(userEmail.toLowerCase(), req.body.password, function(email) {
             res.send(`New user "${email}" created !`);    
